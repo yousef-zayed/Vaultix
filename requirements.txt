@@ -1,0 +1,8 @@
+pywin32
+pwinput
+pyfiglet
+pycryptodome
+keyring
+requests
+tabulate
+zxcvbn
