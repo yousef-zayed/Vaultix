@@ -1,8 +1,5 @@
 # Vaultix
 
-#### Video Demo: [Vaultix](https://youtu.be/tQMi5Gmo68w)
-
-#### Description:
 A secure, multi-user password management tool built in Python. Vaultix combines password management, password generation, and password strength analysis into a single CLI application. It uses AES-256-GCM encryption, PBKDF2 key derivation, and Windows Hello biometric authentication to protect your credentials.
 
 ---
