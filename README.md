@@ -45,7 +45,7 @@ pip install -r requirements.txt
 python project.py
 ```
 
-The database file (`database.db`) is created automatically on first run.
+The database file (`vaultix.db`) is created automatically on first run.
 
 ---
 
