@@ -47,9 +47,11 @@ def main():
 
             key = users.login(username)
             if key is None:
+                os.system("cls")
                 print("\nFailed to Authenticate :<")
                 break
             elif key == "None":
+                os.system("cls")
                 print("\nInvalid username, there's no such user :<")
                 break
             
@@ -64,11 +66,13 @@ def main():
                 helpers.update_activity(_timeout)
                 srvc = service()
             
+            os.system("cls")
             db.close()
             break
         else:
+            os.system("cls")
             break
-
+    
     print(pyfiglet.figlet_format("CYA", font='big_money-sw'))
 
 
