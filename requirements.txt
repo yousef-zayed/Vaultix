@@ -1,0 +1,8 @@
+pwinput
+pyfiglet
+pycryptodome
+pyperclip
+keyring
+requests
+tabulate
+zxcvbn
