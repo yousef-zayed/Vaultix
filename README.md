@@ -8,7 +8,7 @@ A secure, multi-user password management tool built in Python. Vaultix combines 
 
 - **Multi-user support** — multiple users can register and manage their own separate vaults
 - **AES-256-GCM encryption** — every password is encrypted before being stored in the database
-- **Windows Hello authentication** — biometric or PIN-based login, no need to type your master password every time
+- **OS authentication** — biometric or PIN-based login using Windows Hello, Operating system current account credintials for Linux
 - **Password generation** — generates cryptographically secure passwords with guaranteed character class requirements
 - **Password strength analysis** — scores passwords using zxcvbn entropy estimation and checks them against the HaveIBeenPwned breach database
 - **CSV import/export** — backup or migrate your vault entries
@@ -19,19 +19,26 @@ A secure, multi-user password management tool built in Python. Vaultix combines 
 
 ## Requirements
 
-- Windows (required for Windows Hello and clipboard integration)
+- Windows or Linux
 - Python 3.13+
-- The following external libraries (install via `pip install -r requirements.txt`):
+- The following external libraries:
 
 ```
-pywin32
 pwinput
 pyfiglet
 pycryptodome
+pyperclip
 keyring
 requests
 tabulate
 zxcvbn
+```
+
+### Extra libraries for Linux
+
+```
+python-pam
+six
 ```
 
 ---
@@ -42,6 +49,7 @@ zxcvbn
 git clone <repository>
 cd vaultix
 pip install -r requirements.txt
+pip install -r extra-linux-requirements.txt ## extra step for linux systems
 python project.py
 ```
 
