@@ -136,9 +136,10 @@ Responsible for generating cryptographically secure random passwords using Pytho
 
 A collection of utility functions used across multiple files:
 
-- **`copy_to_clipboard`** — copies a password to the Windows clipboard
+- **`copy_to_clipboard`** — copies a password to the clipboard
 - **`clear_clipboard`** — clears the clipboard after a given number of seconds using a background daemon thread
 - **`windows_hello_auth`** — triggers the Windows Hello authentication prompt via a PowerShell script using the `UserConsentVerifier` WinRT API
+- **`authenticate`** — OS abstraction function, used to trigger the authnetication script if the system used is Windows. If the device is using any Linux distro it will authenticate the user using the current operating system account credentials through PAM. Otherwise it raises NotImplementedError for unsupported OS.
 - **`confirmation`** — prompts the user for a yes/no confirmation before destructive operations
 - **`check_strength`** — evaluates a password's strength using the `zxcvbn` library (score 0–4, warnings, suggestions, estimated crack time) and checks it against the HaveIBeenPwned API using k-anonymity to preserve privacy
 - **`update_activity`** — manages session timeout by restarting a 5-minute timer on each user action
@@ -164,7 +165,7 @@ The UI follows a menu-driven structure:
 | Password storage | AES-256-GCM — encrypted at rest, never stored in plaintext |
 | Key derivation | PBKDF2-HMAC-SHA256, 600,000 iterations, 16-byte random salt |
 | Key storage | Windows Credential Manager, protected by the OS |
-| Authentication | Windows Hello (biometric or PIN) |
+| Authentication | Windows Hello (biometric or PIN) or the current operating system account credentials in Linux|
 | Clipboard | Auto-cleared after 5 minutes via background thread |
 | Breach detection | HaveIBeenPwned k-anonymity API — only first 5 chars of SHA1 hash are sent |
 | Tamper detection | AES-GCM authentication tag verified on every retrieval |
@@ -175,6 +176,6 @@ The UI follows a menu-driven structure:
 
 ## Limitations
 
-- Windows only — Windows Hello and `pywin32` are not available on other platforms
+- Windows & Linux only — Windows Hello and `pam` are not available on other platforms
 - Clipboard history (Win+V) may retain passwords even after auto-clear, as Windows clipboard history is managed separately by the OS
 - The clipboard auto-clear thread is tied to the program's lifetime — if the program is closed before the timer expires, the clipboard is not cleared

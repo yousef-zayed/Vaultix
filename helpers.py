@@ -37,16 +37,23 @@ def windows_hello_auth() -> bool:
 
 
 def authenticate() -> bool:
+    '''
+    platform adapter for user authentication
+    :return: True if the user is authenticated successfully, False otherwise
+    :rtype: bool
+    :raise NotImplementedError: if the platform is not supported
+    '''
     ## platform adapter for user authentication
     if sys.platform == "win32":
         return windows_hello_auth()
-    else:
+    elif sys.platform.startswith("linux"):
         import pam, getpass, pwd
         os_user = pwd.getpwuid(os.getuid()).pw_name
         p = pam.pam()
         password = getpass.getpass("System password: ")
         return p.authenticate(os_user, password)
-    
+    else:
+        raise NotImplementedError("Unsupported platform for authentication")
 
 def clear_screen():
     ## clear the terminal screen
