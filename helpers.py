@@ -40,7 +40,7 @@ def authenticate() -> bool:
     '''
     platform adapter for user authentication
     :return: True if the user is authenticated successfully, False otherwise
-    :rtype: bool
+    :rtype: bool 
     :raise NotImplementedError: if the platform is not supported
     '''
     ## platform adapter for user authentication
